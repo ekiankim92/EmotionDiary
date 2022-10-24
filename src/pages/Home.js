@@ -14,9 +14,6 @@ const Home = () => {
     currentDate.getMonth() + 1
   } (${month})`;
 
-  console.log("month:", month);
-  console.log("headText:", headText);
-
   const increaseMonth = () => {
     setCurrentDate(
       new Date(

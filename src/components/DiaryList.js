@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import MyButton from "./MyButton";
+import { useNavigate } from "react-router";
+import DiaryItem from "./DiaryItem";
 
 const sortOptionList = [
   { value: "latest", name: "Latest" },
@@ -8,13 +11,17 @@ const sortOptionList = [
 
 const filterOptionList = [
   { value: "all", name: "All" },
-  { value: "good", name: "Only good" },
-  { value: "bad", name: "Only bad" },
+  { value: "good", name: "Good emotions" },
+  { value: "bad", name: "Bad emotions" },
 ];
 
 const ControlMenu = ({ value, onChange, optionList }) => {
   return (
-    <select value={value} onChange={(event) => onChange(event.target.value)}>
+    <select
+      className="ControlMenu"
+      value={value}
+      onChange={(event) => onChange(event.target.value)}
+    >
       {optionList.map((el) => (
         <option key={uuidv4()} value={el.value}>
           {el.name}
@@ -27,6 +34,7 @@ const ControlMenu = ({ value, onChange, optionList }) => {
 const DiaryList = ({ diaryList }) => {
   const [sortType, setSortType] = useState("latest");
   const [filter, setFilter] = useState("all");
+  const navigate = useNavigate();
 
   const getProcessedDiaryList = () => {
     const compare = (a, b) => {
@@ -54,22 +62,36 @@ const DiaryList = ({ diaryList }) => {
     return sortedList;
   };
 
+  const onClickNewDiary = () => {
+    navigate("/new");
+  };
+
   return (
-    <div>
-      <ControlMenu
-        value={sortType}
-        onChange={setSortType}
-        optionList={sortOptionList}
-      />
-      <ControlMenu
-        value={filter}
-        onChange={setFilter}
-        optionList={filterOptionList}
-      />
-      {getProcessedDiaryList().map((el) => (
-        <div key={uuidv4()}>
-          {el.content} {el.emotion}
+    <div className="DiaryList">
+      <div className="menu_wrapper">
+        <div className="left_column">
+          <ControlMenu
+            value={sortType}
+            onChange={setSortType}
+            optionList={sortOptionList}
+          />
+          <ControlMenu
+            value={filter}
+            onChange={setFilter}
+            optionList={filterOptionList}
+          />
         </div>
+        <div className="right_column">
+          <MyButton
+            text={"Write new diary"}
+            type={"positive"}
+            onClick={onClickNewDiary}
+          />
+        </div>
+      </div>
+
+      {getProcessedDiaryList().map((el) => (
+        <DiaryItem key={uuidv4()} {...el} />
       ))}
     </div>
   );
