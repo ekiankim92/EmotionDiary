@@ -50,9 +50,23 @@ const Diary = () => {
         />
         <article>
           <section>
-            <h4>Today's emotion</h4>
-            <div className="diary_img_wrapper">
+            <h4>Today's feeling</h4>
+            <div
+              className={[
+                "diary_img_wrapper",
+                `diary_img_wrapper_${data.emotion}`,
+              ].join(" ")}
+            >
               <img src={currentEmotionData.emotion_img} alt="emotion" />
+              <div className="emotion_descript">
+                {currentEmotionData.emotion_descript}
+              </div>
+            </div>
+          </section>
+          <section>
+            <h4>Today's diary</h4>
+            <div className="diary_content_wrapper">
+              <p>{data.content}</p>
             </div>
           </section>
         </article>
