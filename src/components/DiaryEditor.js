@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import MyHeader from "./MyHeader";
 import MyButton from "./MyButton";
 import EmotionItem from "./EmotionItem";
@@ -13,7 +13,7 @@ const DiaryEditor = ({ isEdit, originData }) => {
   const [emotion, setEmotion] = useState(3);
   const [content, setContent] = useState("");
   const contentRef = useRef();
-  const { onCreate, onEdit } = useContext(DiaryDispatchContext);
+  const { onCreate, onEdit, onRemove } = useContext(DiaryDispatchContext);
 
   const onClickGoBack = () => {
     navigate(-1);
@@ -23,9 +23,9 @@ const DiaryEditor = ({ isEdit, originData }) => {
     setDate(event.target.value);
   };
 
-  const onClickEmotion = (emotion) => {
+  const onClickEmotion = useCallback((emotion) => {
     setEmotion(emotion);
-  };
+  }, []);
 
   const onChangeContent = (event) => {
     setContent(event.target.value);
@@ -54,6 +54,13 @@ const DiaryEditor = ({ isEdit, originData }) => {
     navigate("/", { replace: true });
   };
 
+  const onClickDelete = () => {
+    if (window.confirm("Are you sure you want to delete?")) {
+      onRemove(originData.id);
+      navigate("/", { replace: true });
+    }
+  };
+
   useEffect(() => {
     if (isEdit) {
       setDate(getStringDate(new Date(parseInt(originData.date))));
@@ -67,6 +74,15 @@ const DiaryEditor = ({ isEdit, originData }) => {
       <MyHeader
         headText={isEdit ? "Edit Diary" : "Write new diary"}
         leftChild={<MyButton text={"< Back"} onClick={onClickGoBack} />}
+        rightChild={
+          isEdit && (
+            <MyButton
+              text={"Delete"}
+              type={"negative"}
+              onClick={onClickDelete}
+            />
+          )
+        }
       />
       <div>
         <section>
