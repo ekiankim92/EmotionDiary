@@ -21,16 +21,6 @@ const DiaryItem = ({ id, emotion, content, date }) => {
           `emotion_img_wrapper_${emotion}`,
         ].join(" ")}
       >
-        {/* <img
-          src={process.env.PUBLIC_URL + `assets/emotion${emotion}`}
-          alt="emotion"
-        /> */}
-        {/* <img src={`../assets/emotion${emotion}`} alt="emotion faces" /> */}
-        {/* <img src={"../assets/emotion1.png"} alt="" /> */}
-        {/* <img src={require(`../assets/emotion${emotion}`)} alt="" /> */}
-        {/* <img src={require("../assets/emotion1.png"))} alt="" /> */}
-        {/* <img src={require("../assets/emotion1.png")} alt="" /> */}
-        {/* <img src={require(`../assets/emotion2.png`)} alt="" /> */}
         <img src={require(`../assets/emotion${emotion}.png`)} alt="" />
       </div>
       <div className="info_wrapper" onClick={onClickDetail}>
