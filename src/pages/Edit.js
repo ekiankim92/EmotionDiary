@@ -18,6 +18,7 @@ const Edit = () => {
       if (targetDiary) {
         setOriginData(targetDiary);
       } else {
+        alert("Not a valid diary");
         navigate("/", { replace: true });
       }
     }
