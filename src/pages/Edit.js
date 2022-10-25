@@ -10,6 +10,11 @@ const Edit = () => {
   const [originData, setOriginData] = useState();
 
   useEffect(() => {
+    const titleElement = document.getElementsByTagName("title")[0];
+    titleElement.innerHTML = `Emotion diary - ${id} edit`;
+  }, []);
+
+  useEffect(() => {
     if (diaryList.length >= 1) {
       const targetDiary = diaryList.find(
         (el) => parseInt(el.id) === parseInt(id)
