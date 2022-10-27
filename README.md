@@ -3,7 +3,7 @@
 👉 https://ek-emotiondiary.web.app/ 👈
 
 <p>This is a simple toy project, which the primary reason 
-for this toy project was to focus trying on new hooks, optimizations, and style</p>
+for this toy project was to focus trying on new hooks, optimizations, and style.</p>
 <br />
     New attributes: <br />
     - React.memo <br />
