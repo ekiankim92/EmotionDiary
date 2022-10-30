@@ -1,4 +1,4 @@
-# Emotion Diary 😃 😑 😔 😂
+# Emotion Diary 😃 😑 😔 😂 😍
 
 👉 https://ek-emotiondiary.web.app/ 👈
 
